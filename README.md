@@ -6,7 +6,7 @@ A mobile robot modelled in Gazebo environment. Object detection using camera and
 
 Robot and object             |  World          | Rvix visualization            
 :-------------------------:|:-------------------------:| :-------------------------:
-<img src="images/robot.png"width="280" height="280"/></a>  |  <img src="images/world.png"  width="280" height="280"/></a>   | <img src="images/Rviz.png" width="280" height="280"/></a>  
+<img src="images/robot.png" width="400" height="280"/></a>  |  <img src="images/world.png"  width="400" height="280"/></a>   | <img src="images/Rviz.png" width="400" height="280"/></a>  
 ### Nodes / Topics
 <img src="images/nodemap.png" alt="nodemap" /></a>  
 
