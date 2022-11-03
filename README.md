@@ -1,4 +1,4 @@
-# RoboND-Term1-P2-Go-Chase-It
+# Mobile robot object follower using camera and lidar
 Project 2 of Udacity Robotics Software Engineer Nanodegree Program
 ![Overview](https://github.com/anyuguo/Robotics-Software-Engineer-Udacity/blob/master/P2-Go-Chase-It/pic/video_gif.gif)  
 ## Overview  
