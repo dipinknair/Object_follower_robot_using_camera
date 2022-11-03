@@ -25,13 +25,14 @@ Created two ROS packages inside your `catkin_ws/src`: the `drive_bot` and the `b
   * Linux: gcc / g++ is installed by default on most Linux distros
   * Mac: same deal as make - [install Xcode command line tools]((https://developer.apple.com/xcode/features/)
   * Windows: recommend using [MinGW](http://www.mingw.org/)
-## Setup Instructions (abbreviated)  
-1. Meet the `Prerequisites/Dependencies`  
-2. Open Ubuntu Bash and clone the project repository  
-3. On the command line execute  
-```bash
-sudo apt-get update && sudo apt-get upgrade -y
-```
+ 
+## Setup Instructionfor prerequisite  
+ 
+1. Install Gazebo and [ROS](http://wiki.ros.org/ROS/Installation) on Linux.
+2. Install `sudo apt-get install ros-${ROS_DISTRO}-gazebo-ros-pkgs`
+(If you are using gazebo11 it should be `sudo apt-get install ros-${ROS_DISTRO}-gazebo11-ros-pkgs`)
+3. Cmake and gcc/g++
+
 4. Build and run your code.  
 ## Project Description  
 Directory Structure  
