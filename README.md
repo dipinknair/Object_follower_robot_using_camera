@@ -4,9 +4,11 @@ A mobile robot modelled in Gazebo environment. Object detection using camera and
 <img src="images/run.gif" alt="demo" width="500" height="280"/></a>
 ### world and models
 
-Solarized dark             |  Solarized Ocean          | Solarized dark             
+Robot and object             |  World          | Rvix visualization            
 :-------------------------:|:-------------------------:| :-------------------------:
-!<img src="images/robot.png" alt="demo" width="500" height="280"/></a>  |  ![](https://...Ocean.png) | ![](https://...Ocean.png)
+<img src="images/robot.png" alt="demo" width="280" height="280"/></a>  |  <img src="images/world.png" alt="demo" width="280" height="280"/></a>   | <img src="images/Rviz.png" alt="demo" width="280" height="280"/></a>  
+### Nodes / Topics
+<img src="images/nodemap.png" alt="demo" width="500" height="280"/></a>  
 
 ## Overview  
 Created two ROS packages inside your `catkin_ws/src`: the `drive_bot` and the `ball_chaser`. Here are the steps to design the robot, house it inside your world, and program it to chase white-colored balls:  
