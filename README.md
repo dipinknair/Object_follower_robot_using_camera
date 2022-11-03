@@ -1,8 +1,8 @@
 # Mobile robot object follower using camera and lidar
-Project 2 of Udacity Robotics Software Engineer Nanodegree Program
+A mobile robot modelled in Gazebo environment. Object detection using camera and lidar which is visualized using Rviz
 ![Overview](images/)  
 ## Overview  
-In this project you'll create two ROS packages inside your `catkin_ws/src`: the `drive_bot` and the `ball_chaser` which will be used in Gazebo for all your upcoming projects in the [Udacity Robotics Software Engineer Nanodegree Program](https://www.udacity.com/course/robotics-software-engineer--nd209). Here are the steps to design the robot, house it inside your world, and program it to chase white-colored balls:  
+Created two ROS packages inside your `catkin_ws/src`: the `drive_bot` and the `ball_chaser`. Here are the steps to design the robot, house it inside your world, and program it to chase white-colored balls:  
 1. `drive_bot`:  
 * Create a `my_robot` ROS package to hold your robot, the white ball, and the world.
 * Design a differential drive robot with the Unified Robot Description Format. Add two sensors to your robot: a lidar and a camera. Add Gazebo plugins for your robot’s differential drive, lidar, and camera. The robot you design should be significantly different from the one presented in the project lesson. Implement significant changes such as adjusting the color, wheel radius, and chassis dimensions. Or completely redesign the robot model! After all you want to impress your future employers :-D
@@ -36,39 +36,30 @@ sudo apt-get update && sudo apt-get upgrade -y
 ## Project Description  
 Directory Structure  
 ```
-.Go-Chase-It                                   # Go Chase It Project
-├── catkin_ws                                  # Catkin workspace
-│   ├── src
-│   │   ├── ball_chaser                        # ball_chaser package        
-│   │   │   ├── launch                         # launch folder for launch files
-│   │   │   │   ├── ball_chaser.launch
-│   │   │   ├── src                            # source folder for C++ scripts
-│   │   │   │   ├── drive_bot.cpp
-│   │   │   │   ├── process_images.cpp
-│   │   │   ├── srv                            # service folder for ROS services
-│   │   │   │   ├── DriveToTarget.srv
-│   │   │   ├── CMakeLists.txt                 # compiler instructions
-│   │   │   ├── package.xml                    # package info
-│   │   ├── my_robot                           # my_robot package        
-│   │   │   ├── launch                         # launch folder for launch files   
-│   │   │   │   ├── robot_description.launch
-│   │   │   │   ├── world.launch
-│   │   │   ├── meshes                         # meshes folder for sensors
-│   │   │   │   ├── hokuyo.dae
-│   │   │   ├── urdf                           # urdf folder for xarco files
-│   │   │   │   ├── my_robot.gazebo
-│   │   │   │   ├── my_robot.xacro
-│   │   │   ├── worlds                         # world folder for world files
-│   │   │   │   ├── empty.world
-│   │   │   │   ├── office.world
-│   │   │   ├── CMakeLists.txt                 # compiler instructions
-│   │   │   ├── package.xml                    # package info
-├── my_ball                                    # Model files 
-│   ├── model.config
-│   ├── model.sdf
-├── pic                                     
-│   ├── record video.mp4                       # video
-│   ├── video_gif.gif                          # video
+.Project                # Go Chase It Project
+├── my_robot                       # my_robot package
+│   ├── launch                     # launch folder for launch files
+│   │   ├── robot_description.launch
+│   │   ├── world.launch
+│   ├── meshes                     # meshes folder for sensors
+│   │   ├── hokuyo.dae
+│   ├── urdf                       # urdf folder for xarco files
+│   │   ├── my_robot.gazebo
+│   │   ├── my_robot.xacro
+│   ├── world                      # world folder for world files
+│   │   ├── UdacityOffice.world
+│   ├── CMakeLists.txt             # compiler instructions
+│   ├── package.xml                # package info
+├── ball_chaser                    # ball_chaser package
+│   ├── launch                     # launch folder for launch files
+│   │   ├── ball_chaser.launch
+│   ├── src                        # source folder for C++ scripts
+│   │   ├── drive_bot.cpp
+│   │   ├── process_images.cpp
+│   ├── srv                        # service folder for ROS services
+│   │   ├── DriveToTarget.srv
+│   ├── CMakeLists.txt             # compiler instructions
+│   ├── package.xml                # package info
 ```
 - [record video.mp4](/pic/record video.mp4): A recording video.  
 - [drive_bot.cpp](/catkin_ws/src/ball_chaser/src/drive_bot.cpp): ROS service C++ script, command the robot with specify speeds.  
@@ -82,29 +73,36 @@ Directory Structure
 - [my_robot.gazebo](/catkin_ws/src/my_robot/urdf/my_robot.gazebo): Define my_robot URDF model plugins.  
 - [my_robot.xacro](/catkin_ws/src/my_robot/urdf/my_robot.xacro): Define my_robot URDF model.  
 
-## Run the project  
-* Clone this repository
-* Open the repository and make  
+## Build and Launch
+
+1. Clone and initialize project with a catkin workspace
+```console
+$ mkdir catkin_ws && cd catkin_ws
+$ git clone https://github.com/dipinknair/Object_follower_robot_using_camera.git
+$ mv Object_follower_robot_using_camera src
+$ cd src && catkin_init_workspace
 ```
-cd /home/workspace/catkin_ws/
-catkin_make
+
+2. Move back to `catkin_ws\` and build
 ```
-* Launch my_robot in Gazebo to load both the world and plugins  
+$ cd ..
+$ catkin_make
 ```
-roslaunch my_robot world.launch
-```   
-* Launch ball_chaser and process_image nodes  
+
+3. Launch the world
 ```
-cd /home/workspace/catkin_ws/
-source devel/setup.bash
-roslaunch ball_chaser ball_chaser.launch
-```  
-* Visualize  
+$ source devel/setup.bash
+$ roslaunch my_robot world.launch
 ```
-cd /home/workspace/catkin_ws/
-source devel/setup.bash
-rosrun rqt_image_view rqt_image_view  
-```  
+
+4. Open another terminal (Ctrl+Shift+T), and launch the `ball_chaser` package
+```
+$ source devel/setup.bash
+$ roslaunch ball_chaser ball_chaser.launch
+```
+
+5. Play around! Pick up the white ball and place in front of the mobile robot. The robot will follow the ball.
+Footer
 
 ## Code Style
 
