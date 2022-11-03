@@ -1,6 +1,7 @@
 # Mobile robot object follower using camera and lidar
 A mobile robot modelled in Gazebo environment. Object detection using camera and lidar which is visualized using Rviz
-![Overview](images/)  
+![Overview](images/model.png)  
+<img src="images/run.gif" alt="demo" width="500" height="280"/></a>
 ## Overview  
 Created two ROS packages inside your `catkin_ws/src`: the `drive_bot` and the `ball_chaser`. Here are the steps to design the robot, house it inside your world, and program it to chase white-colored balls:  
 1. `drive_bot`:  
