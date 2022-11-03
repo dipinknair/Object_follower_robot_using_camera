@@ -62,18 +62,6 @@ Directory Structure
 │   ├── CMakeLists.txt             # compiler instructions
 │   ├── package.xml                # package info
 ```
-- [record video.mp4](/pic/record video.mp4): A recording video.  
-- [drive_bot.cpp](/catkin_ws/src/ball_chaser/src/drive_bot.cpp): ROS service C++ script, command the robot with specify speeds.  
-- [process_images.cpp](/catkin_ws/src/ball_chaser/src/process_images.cpp): ROS service C++ script, process the camera image and return requested speeds.  
-- [world.launch](/catkin_ws/src/my_gokart/launch/world.launch): Launch my_gokart mode in Gazebo world with building and plugins.  
-- [robot_description.launch](/catkin_ws/src/my_robot/launch/robot_description.launch): Create robot model in Gazebo world. 
-- [empty.world](/catkin_ws/src/my_robot/worlds/empty.world): Gazebo world file that includes nothing.  
-- [office.world](/catkin_ws/src/my_robot/worlds/office.world): Gazebo world file that includes the models.  
-- [CMakeLists.txt](/catkin_ws/src/my_robot/CMakeLists.txt): File to link the C++ code to libraries.  
-- [hokuyo.dae](/catkin_ws/src/my_robot/meshes/hokuyo.dae): Hokuyo LiDAR sensor mesh model.  
-- [my_robot.gazebo](/catkin_ws/src/my_robot/urdf/my_robot.gazebo): Define my_robot URDF model plugins.  
-- [my_robot.xacro](/catkin_ws/src/my_robot/urdf/my_robot.xacro): Define my_robot URDF model.  
-
 ## Build and Launch
 
 1. Clone and initialize project with a catkin workspace
