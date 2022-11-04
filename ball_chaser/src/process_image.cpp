@@ -8,68 +8,67 @@ ros::ServiceClient client;
 // This function calls the command_robot service to drive the robot in the specified direction
 void drive_robot(float lin_x, float ang_z)
 {
-  ROS_INFO_STREAM("Try sending request to move the robot.");
+    // TODO: Request a service and pass the velocities to it to drive the robot
+    ball_chaser::DriveToTarget srv;
+    srv.request.angular_z = ang_z;
+    srv.request.linear_x = lin_x;
+	
+    if (client.call(srv)){ROS_INFO("Services success.");}
+    else{ROS_ERROR("Services Failed");}
+  
 
-  // Create a request
-  ball_chaser::DriveToTarget srv;
-  srv.request.linear_x = lin_x;
-  srv.request.angular_z = ang_z;
-
-  // Call the command_robot service with request values given above
-  if (!client.call(srv))
-    ROS_ERROR("Failed to call service /ball_chaser/command_robot");
 }
 
 // This callback function continuously executes and reads the image data
-void process_image_callback(const sensor_msgs::Image& img)
+void process_image_callback(const sensor_msgs::Image img)
 {
-  enum Side : uint8_t {LEFT, MID, RIGHT, NO_BALL} side = NO_BALL;
 
-  // Determine if there is a white ball and if yes, on which side
-  for (int i = 0; i < img.height * img.step; i+=3) {
-    auto red   = img.data[i];
-    auto green = img.data[i+1];
-    auto blue  = img.data[i+2];
+    int white_pixel = 255;
+    bool dectection =  false;
+    int  image_y = -1;
+    int left_margin = img.width/3;
+    int right_margin = 2*img.width/3;
 
-    if (red == 255 && green == 255 && blue == 255) {
-      auto col = i % img.step;
-      if (col < img.step * 0.4) {
-        side = LEFT;
-      } else if (col > img.step * 0.6) {
-        side = RIGHT;
-      } else {
-        side = MID;
-      }
-      break;
-    }
-  }
+    // TODO: Loop through each pixel in the image and check if there's a bright white one
+    // Then, identify if this pixel falls in the left, mid, or right side of the image
+    // Depending on the white ball position, call the drive_bot function and pass velocities to it
+    // Request a stop when there's no white ball seen by the camera
+ 	for (int j = 0; j < (img.height * img.step); j=j+3)
+    	{
+        	if (img.data[j] == white_pixel && 
+            		img.data[j+1] == white_pixel && 
+            		img.data[j+2] == white_pixel)
+        	{
+                      dectection = true;
+          	      image_y = (j/3)% img.width;
+                      break;
+        	}
+    	}
 
-  // Drive robot towards the ball
-  if (side == LEFT) {
-    drive_robot(0.5, 1.0);
-  } else if (side == RIGHT) {
-    drive_robot(0.5, -1.0);
-  } else if (side == MID) {
-    drive_robot(0.5, 0.0);
-  } else /* NO_BALL */ {
-    drive_robot(0.0, 0.0);
-  }
+	if(dectection==true){
+		if (image_y < left_margin){drive_robot(1.0, 0.5);}
+                else if (image_y >= left_margin && image_y < right_margin){drive_robot(1.0, 0.0);}
+                else if (image_y >= right_margin){drive_robot(1.0, -0.5);}
+	}
+	else{drive_robot(0.0, 0.0);}
+
+
 }
 
 int main(int argc, char** argv)
 {
-  // Initialize the process_image node and create a handle to it
-  ros::init(argc, argv, "process_image");
-  ros::NodeHandle n;
+    // Initialize the process_image node and create a handle to it
+    ros::init(argc, argv, "process_image");
+    ros::NodeHandle n;
 
-  // Define a client service capable of requesting services from command_robot
-  client = n.serviceClient<ball_chaser::DriveToTarget>("/ball_chaser/command_robot");
+    // Define a client service capable of requesting services from command_robot
+    client = n.serviceClient<ball_chaser::DriveToTarget>("/ball_chaser/command_robot");
 
-  // Subscribe to /camera/rgb/image_raw topic to read the image data inside the process_image_callback function
-  ros::Subscriber sub1 = n.subscribe("/camera/rgb/image_raw", 10, process_image_callback);
+    // Subscribe to /camera/rgb/image_raw topic to read the image data inside the process_image_callback function
+    ros::Subscriber sub1 = n.subscribe("/camera/rgb/image_raw", 10, process_image_callback);
 
-  // Handle ROS communication events
-  ros::spin();
+    // Handle ROS communication events
+    ros::spin();
 
-  return 0;
+    return 0;
 }
